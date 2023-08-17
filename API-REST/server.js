@@ -1,8 +1,11 @@
-import app from "./src/app";
+import app from './src/app.js';
 
-const port = 3000;
+//constantes usam como padrão letras maiusculas
+const PORT = 3000;
 
 // escuta a porta  
-app.listen(port,()=>{
-    console.log(`servidor rodando no endereço http://localhost:${port}`);
+app.listen(PORT,()=>{
+    console.log(`servidor rodando no endereço http://localhost:${PORT}`);
 })
+
+//subir o servidor
