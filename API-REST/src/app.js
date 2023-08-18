@@ -6,12 +6,7 @@ const app = express();
 app.use(express.json());
 
 //mock
-const selecoes = [
-    {id: 1, selecao: 'BRASIL', grupo: 'G'},
-    {id: 2, selecao: 'Suiça', grupo: 'G'},
-    {id: 3, selecao: 'Sérvia', grupo: 'G'},
-    {id: 4, selecao: 'Camarões', grupo: 'G'},
-]
+
 
 //requisita uma rota raiz http, toda requisição precisa de um res e um request
 app.get('/', (req,res)=>{
