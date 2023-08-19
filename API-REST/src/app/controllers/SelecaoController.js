@@ -1,67 +1,38 @@
-import dbConex from "../database/db.js";
+
+import SelecaoRepositorie from "../repositories/SelecaoRepositorie.js";
+
 
 class SelecaoController {
 
-    index(req,res){
-        const sql = "SELECT * FROM selecoes"
-        dbConex.query(sql, (erro,resultado) => {
-            if(erro) {
-                res.status(404).json({'erro' : erro})
-            }else {
-                res.status(200).json(resultado);
-            }
-        })
+    async index(req,res){
+        const row = await SelecaoRepositorie.findAll()
+        res.json(row)
     }
 
-    show(req,res) {
-        const id = req.params.id;
-        const sql = "SELECT * FROM selecoes WHERE id=?"
-        dbConex.query(sql,id,(erro,resultado) => {
-            if(erro) {
-                res.status(404).json({'erro' : erro})
-            }else {
-                res.status(200).json(resultado);
-            }
-        })
+    async show(req,res) {
+       const id = req.params.id;
+       const row = await SelecaoRepositorie.findById(id)
+       res.json(row)
     }
 
-    store(req,res) {
+    async store(req,res) {
     const selecao  = req.body;
-    const sql = "INSERT INTO selecoes SET ?;"
-    const values = { selecoes: selecao.selecao, grupo: selecao.grupo }; 
-    dbConex.query(sql,values,(erro,resultado) => {
-        if(erro) {
-            res.status(404).json({'erro' : erro})
-        }else {
-            res.status(201).json(resultado);
-        }
-    })
+    const row = await SelecaoRepositorie.create(selecao);
+    res.json(row)
 
 }
 
-    uptdate(req,res) {
+    async uptdate(req,res) {
         const id = req.params.id
         const selecao = req.body
-        const sql = "UPDATE selecoes SET ? WHERE id=?"
-        dbConex.query(sql,[selecao,id],(erro,resultado) =>{
-            if(erro){
-                res.status(404).json({'erro':erro})
-            }else{
-                res.status(200).json(resultado);
-            }
-    })
+        const row = await SelecaoRepositorie.update(selecao,id)
+        res.json(row)
     }
 
-    delete(req,res) {
+    async delete(req,res) {
         const id = req.params.id
-        const sql = "DELETE FROM selecoes WHERE id=?"
-        dbConex.query(sql, id,(erro,resultado) =>{
-            if(erro){
-                res.status(404).json({'erro':erro})
-            }else{
-                res.status(200).json(resultado);
-            }
-        })
+        const row = await SelecaoRepositorie.delete(id)
+        res.json(row)
     }
 }
 //padrão singleton
