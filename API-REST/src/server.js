@@ -1,5 +1,5 @@
-import app from './src/app.js'
-import dbConex from './src/app/database/db.js'
+import app from './app.js'
+import dbConex from './app/database/db.js'
 //constantes usam como padrão letras maiusculas
 const PORT = 3000;
 
